@@ -32,3 +32,8 @@ Cleanup database
 ```bash
 psql -U postgres -d library_db -f drop_objects.sql
 ```
+
+```bash
+psql -U postgres -c "DROP DATABASE library_db;"
+```
+

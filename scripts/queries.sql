@@ -92,3 +92,13 @@ JOIN loan l ON b.book_id = l.book_id
 GROUP BY b.title
 ORDER BY loans_cnt DESC
 LIMIT 1;
+
+-- 13. Update с подзапросом в SELECT
+-- "Обновить стоимость книг, изданных до 2000 года, увеличив ее на разницу между текущей ценой и средней ценой книги изданной за последние 5 лет."
+UPDATE book
+SET estimated_value = estimated_value + (
+    SELECT AVG(estimated_value) 
+    FROM book 
+    WHERE publish_year >= EXTRACT(YEAR FROM CURRENT_DATE) - 5
+) / 10
+WHERE publish_year < 2000;
